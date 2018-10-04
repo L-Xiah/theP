@@ -1,0 +1,8 @@
+
+一、安装
+（https://blog.csdn.net/c_shell_python/article/details/79647627）
+1〉python解释器（https://www.python.org/）
+2〉集成开发工具（PyCharm等）
+3〉环境变量（系统变量Path）
+
+二、
