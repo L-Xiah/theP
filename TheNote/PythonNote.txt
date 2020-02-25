@@ -5,4 +5,10 @@
 2〉集成开发工具（PyCharm等）
 3〉环境变量（系统变量Path）
 
+python
+可以通过安装Anaconda + 集成开发工具（如PyCharm等）
+
+Anaconda是一个第三方库，相当与java的jdk
+
+
 二、
