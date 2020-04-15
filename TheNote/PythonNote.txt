@@ -11,4 +11,7 @@ python
 Anaconda是一个第三方库，相当与java的jdk
 
 
-二、
+二、pip更新
+使用豆瓣代理
+不使用代理：pip install pipenv
+使用代理：pip install --index-url https://pypi.douban.com/simple pipenv
