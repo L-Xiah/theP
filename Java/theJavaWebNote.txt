@@ -1,0 +1,10 @@
+####web项目容器启动####
+关键词：web.xml加载过程、标签详解
+Web项目启动时容器会去加载web.xml文件，web.xml加载过程如下
+1>容器启动时，读取<listener>、<contet-param>
+2>创建ServletContext 上下文
+3>创建<listener>中的类实例
+4>读取<filter>，实例化过滤器
+以上四个步骤是在项目未完全启动时完成
+5>Servlet是在第一次发起请求的时候被实例化的，而且一般不会被容器销毁，它可以服务于多个用户的请求。所以，Servlet的初始化都要比上面提到的那几个要迟。
+总的来说，web.xml的加载顺序是:<context-param>-><listener>-><filter>-><servlet>。其中，如果web.xml中出现了相同的元素，则按照在配置文件中出现的先后顺序来加载。

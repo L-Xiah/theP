@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--"MyNotes"文件夹下常用文件-->
+<Project title = "TheJavaNote">
+
+    <chapter title="其它">
+        <section title="运行*.class文件">
+            在CMD中运行*.class文件
+            比如我写了最基础的一个类：
+            class Hello{
+            public static void main(String[] args) {
+            System.out.println("Hello World") ;
+            }
+            }搜索
+            保存在Hello.java文件中，
+            我通过命令：javac Hello.java去编译，得到Hello.class字节码文件
+            通过命令：java Hello去运行
+            就可以看到输出了Hello World
+        </section>
+        <section title="eclipse中无法查看源代码">
+            Java eclipse中无法查看源代码
+            1.点 “window“-> “Preferences”-> “Java” -> “Installed JRES”；
+            2.此时"Installed JRES"右边是列表窗格，列出了系统中的JRE 环境，选择你的JRE，然后点边上的“Edit...“， 会出现一个窗口(Edit JRE) ；
+            3.选中rt.jar文件的这一项：“C:\Java\jdk1.5.0_04\jre\lib\rt.jar” 点 左边的“+”号展开它（JDK实际安装路径以你的为准）；
+            4.展开后，可以看到“Source Attachment:(none)”，点这一项，点右边的按钮“Source Attachment...“，选择你的JDK目录下的 “src.zip”文件；
+            5.一路点“ok”结束。
+        </section>
+        <section title="上屏键修改">
+            上屏键修改参考：http://www.cnblogs.com/robothy/p/5943345.html
+            http://blog.csdn.net/zy4668/article/details/7660193
+        </section>
+    </chapter>
+
+    <chapter title = "文件">
+        <section title = "文件下载">
+            两种方法：
+            1〉将文件放在部署项目的发布路径内，给客户端提高路径名称（发布项目所在位置的相对路径）；文件相对于客户端而言是公开的。
+            2〉使用HttpServletResponse以流的方式给请求传输文件（输出流到客户端）
+            注：可以下载网络文件（通过url）
+        </section>
+        <section title = "文件上传">...</section>
+
+
+    </chapter>
+
+    <chapter title = "Java函数">
+        <section title = "switch">
+            switch(theCase){
+                case 1:case2://判断多个条件
+                    break;
+                case 3:
+                    break;
+                default://以上条件都不符合时执行
+                    break;
+            }
+        </section>
+    </chapter>
+
+    <chapter title = "Js">
+	    <section title = "title ico">
+	    <!--<link href="favicon.ico" rel="shortcut icon"/>网页标题图标-->
+        </section>	
+        <section title = "空格">
+            html中使用"&nbsp;"
+            或在style中设置"style='white-space:pre;'"//保留空格（默认浏览器会将多个空格处理成一个空格）
+        </section>
+        <section title = "样式冲突">
+            css中使用相同名称的样式;
+        </section>
+        <section title="父标签">
+            var $temp = $(this).closest("table").closest("div");//当前标签的table父标签的div父标签
+            var $temp = $(this).parent();//当前标签的父标签
+            var $temp = $(this).parents("div:eq(0)");//当前标签的div父标签（上一级eq(0)）
+        </section>
+
+        <section title="form">
+            form标签最好不要嵌套，提交时出问题,
+            相邻两个form用div隔开
+            例：<!--<div><div><form></form></div><div><form></form></div></div>-->
+        </section>
+
+        <section title="事件">
+            "DOM2级事件”规定的事件流包含三个阶段：事件捕获阶段，处于目标阶段和事件冒泡阶段。
+            首先发生的是事件捕获，然后是实际的目标接收到事件，最后阶段是冒泡阶段。
+            (图：/附件资源/1-5捕获过程，5-6目标阶段，6-10冒泡阶段.png)
+            事件捕获：从上至下，window->document->body->div->button
+            事件冒泡：从下至上，button->div->body->document->window
+
+
+            事件绑定和事件委托
+            事件绑定：将某个具体的标签事件绑定到某个函数中（$("**").click()=function(){}）
+            事件委托：将某一些特征标签的事件委托给某个函数处理（$("**").on("event",[selector],function(){})）
+            在jQuery1.7中 .delegate()已被.on()取代。对于早期版本，它仍然使用事件委托的最有效手段。
+
+            阻止事件冒泡(事件点击一次，执行两遍代码的原因):
+            所以我就开始找其他解决问题的办法，知道后来发现在on绑定事件的时候没有阻止冒泡，在代码中加入 return false 阻止冒泡之后，事件正常运行了，代码如下：
+            $('.right').on('click','.tabDel',function(){
+                //删除所加 tab 节点的函数
+                // alert('tab的索引：'+$(this).parents('.contentLi2').index());
+                var iNum1 = $(this).parents('.contentLi2').index();
+                var iNum2 = $(this).parents('.anElement').index();
+                $scope.module.tab[iNum1].fieldList.splice(iNum2,1);
+                $(this).parents('.anElement').remove();
+                return false;
+            });
+            目前为止代码可以正常运行了，问题的元凶是冒泡。
+            然而，阻止冒泡的方法并不止 return false 这一种，还有event.stopPropagation()，这两种方法是有区别的，简单来说：
+            event.stopPropagation()会阻止事件往上冒泡，但是并不阻止事件本身；
+            return false 则是既阻止了事件往上冒泡又阻止了事件本身。
+            欲详细了解这两种方法的区别，请查找相关资料。
+        </section>
+
+        <section title="js加载先后顺序">
+            如需要特别分清楚所引用的js执行先后顺序，在引用时特别注意引用位置（先执行的放在前面）
+            注：script引用js一般在html文件的最后
+        </section>
+
+        <section title="format">
+            数字3转"03"->(Array(2).join("0") + theM).slice(-2)
+        </section>
+    </chapter>
+
+    <chapter title="框架">
+        1>Spring
+        2>SpringMVC（SPM、RMD等项目）
+        3>SpringBoot（创建Maven项目-〉pom文件-〉依赖jar包、application.java-〉Main程序）
+        4>shiro框架（认证登入）
+        5>log4j2框架（日志输出）
+        5>mybatis
+        7>hibernate
+        8>Junit（测试）
+        9>JQuery
+    </chapter>
+
+    <chapter title="log4j2">
+        1〉pom中引入log4j2依赖（spring-boot-starter-log4j2）
+        2〉log4j2.xml配置（log4j2.xml和application.properties在同一目录下）
+        3〉application.properties中添加日志配置（logging.config=classpath:log4j2.xml）　
+
+        <section title="jar包冲突">
+            SpringBoot默认使用logback（比log4j2更新）来记录日志，如果加载log4j2依赖会和默认的logback冲突；
+            jar包冲突可以在（IDEA有用）“Maven Projects”(选项板)->选中项目-〉“Show Dependencies”(选项板上面的菜单栏)-〉检查冲突jar包；
+            解决方法：排除logback；
+            <dependency><!--排除logback冲突-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            如引用了solr,还需要排除slf4j；
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>7.2.0</version>
+                <exclusions>
+                    <exclusion><!--排除logback冲突-->
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </section>
+    </chapter>
+
+    <chapter title="Spring">
+        大框架，
+        1〉封装了很多成熟的功能（无需重复造轮子）；
+        2〉通过配置文件管理实例（无需再初始化实例）；
+
+        <section title="AOP">
+            AOP（Aspect Oriented Programming-〉面向切面编程）
+            是OOP（Object Oriented Programming-〉面向对象编程）的补充和完善，基本通过代理机制完成的；
+            简单来说，是指在运行时，动态的将代码切入到类的指定方法、指定位置上的编程思想就是面向切面编程。
+
+            AOP目的
+            将软件系统分为两个部分：核心关注点（主要核心业务）、横切关注点（日志、权限等可分离业务）；
+            AOP的作用在于将两者分离开，能减少代码耦合、大量重复。
+
+            AOP核心概念
+            切面（需要切入的代码）、切入点（指定要切入的点-〉方法[也可字段或构造函数]）
+
+            例
+            类A、类B、类C中的方法printPdf()每次调用时，都需要记录调用该方法的时间情况；
+            在这种情况就可使用AOP将记录的代码切入到printPdf()方法调用时。
+
+
+        </section>
+        <section title="IOC/DI">
+            控制反转和依赖注入其实是一个概念的不同角度；
+            控制反转（IOC，Inversion of Control）：程序对象交给容器控制；
+            依赖注入（DI，Dependency Injection）:容器将程序所依赖的对象注入；
+
+            例：
+            主角对象：主程序端、 用户类、用户信息类；
+            传统方法：主程序端主动创建用户类-〉用户信息类-〉将用户信息类主动注入到用户类
+            IOC/DI容器：容器创建用户类、用户信息类，并将用户信息类注入到用户类
+        </section>
+
+
+    </chapter>
+
+    <chapter title="SpringMVC">
+        web框架，
+
+
+
+    </chapter>
+
+    <chapter title="SpringBoot">
+        <section title="jsp/html">
+            springboot不推荐jsp，推荐使用html。
+            application.properties中配置html：
+            #thymelea模板配置
+            spring.thymeleaf.prefix=classpath:/static/
+            spring.thymeleaf.suffix=.html
+            spring.thymeleaf.mode=HTML5
+            spring.thymeleaf.encoding=UTF-8
+            #热部署文件，页面不产生缓存，及时更新
+            spring.thymeleaf.cache=false
+            spring.resources.chain.strategy.content.enabled=true
+            spring.resources.chain.strategy.content.paths=/**
+
+            html文件中：每个标签都需要“/”结束，不能省略，否则会报错
+        </section>
+
+        <section title="静态资源路径配置">
+            直接通过路径访问的文件（开放给浏览器）；
+            可访问的路径：/static/、/public/
+
+            src/main/resources路径下设置static文件可以访问（templates不能访问）
+        </section>
+
+        <section title="部署tomcat">
+            @SpringBootApplication//主程序入口
+            public class Application extends SpringBootServletInitializer {
+                @Override//部署到tomcat上需要
+                protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {return application.sources(Application.class); }
+                public static void main(String[] args){SpringApplication.run(Application.class,args); }
+            }
+        </section>
+
+        <section title="thymeleaf">
+            获取项目名
+            如果是资源文件，th:+href/src="@{资源文件地址}"，该地址与使用内置Tomcat启动地址相同，只是包上@{}
+            <!--<link rel="stylesheet" th:href="@{/reg_assets/css/sky-forms.css}"/>
+            <script th:src="@{/reg_assets/js/jquery-1.9.1.min.js}"></script>-->
+
+            js获取项目名的方式：
+            var context_path = "[[@{/}]]";<!--<script th:inline="javascript">-->
+            这样获取到  /项目名/,所以ajax中url使用：
+            url : "[[@{/}]]face/search/url",
+
+        </section>
+
+        <section title="SpringBoot项目创建">
+            SpringBoot项目创建的两种方式：
+            1> Maven项目-〉添加依赖
+            2> Spring Initializr(需要链接到http://start.spring.io)
+        </section>
+
+    </chapter>
+
+    <chapter title="jar包冲突">
+        由于jar包版本的升级，新版的jar包涵盖了一些原来没有的jar包，
+        这样会导致jar包冲突，
+        同时新项目需要引用到的jar包也少了（大的jar包更新之后，包含了以前一些没有的jar包）。
+        原因：版本升级（主要是jar包版本升级）
+        解决方法：排除冲突jar包（Show Dependencies）
+    </chapter>
+
+    <chapter title="Maven项目Jar包加载">
+
+
+        第一种是将本地jar包安装在本地maven库
+        例：
+        ①我要上传的jar包为：ipdatabase-1.0.jar
+        ②找到本地安装maven的位置的bin目录输入cmd进入到命令行 输入 如下面命令，敲击回车开始执行：
+        mvn install:install-file -Dfile=C:\Users\zhangsf\Desktop\ipdatabase.jar -DgroupId=zhang.jar -DartifactId=ipdatabase -Dversion=1.0 -Dpackaging=jar
+
+
+        第二种是将本地jar包放入项目目录中
+        <!--例
+        <dependency>
+            <groupId>com.spm</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/jar/json-lib-2.3-jdk15.jar</systemPath>
+        </dependency>-->
+
+
+
+    </chapter>
+
+    <chapter title="一般项目Jar包加载">
+
+
+        第一种是将本地jar包放入项目目录中（可以新建一个lib文件夹用来存放jar包）
+        在idea中右键jar包-〉添加到库（add to library）
+
+
+
+    </chapter>
+
+</Project>

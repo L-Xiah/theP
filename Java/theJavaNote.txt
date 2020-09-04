@@ -1,0 +1,115 @@
+
+####运行jar包命令####
+java -cp （指定依赖路径）和 java -jar（指定jar包，jar包已指定了主类）
+（https://www.cnblogs.com/klb561/p/10513575.html）
+eg：
+java -cp scala-library-2.12.3.jar;theScala-0.0.1-SNAPSHOT.jar theJava.theApp
+java -cp lib/scala-library-2.12.3.jar ttt.jar test.testHello
+
+
+
+####Jar包编译及反编译####
+// 将class文件打成jar包的命令
+jar -cfm tt.jar MANIFEST.MF ./test/*.clas
+jar cvf tt.jar test/*
+jar cvfm ttt.jar manifest.mf test/*.class
+
+// MANIFEST.MF--jar包注解
+Class-Path: lib/scala-library-2.12.3.jar（运行jar所依赖jar包，依赖jar包路径相对于运行jar包）
+Main-Class: test.testHello（主函数）
+
+// 通过压缩包生成jar包（在没有jre时，以这种方式打包）
+在应用程序文件夹下创建和jar包同类型的目录结构（包含META-INF目录和MANIFEST.MF文件）；
+将整个应用程序文件夹打包成zip压缩包；
+将zip文件扩展名改为jar；
+
+
+// jar包反编译
+使用Java Decompiler反编译Jar包；
+使用压缩程序打开/解压；
+
+
+####JUnit####
+JUnit单元测试（引用JUnit.jar包）
+通过注解的方式来识别测试方法，JUnit4支持的主要注解有：
+@BeforeClass 全局只会执行一次，而且是第一个运行
+@Before 在测试方法运行之前运行
+@Test 测试方法
+@After 在测试方法运行之后允许
+@AfterClass 全局只会执行一次，而且是最后一个运行
+@Ignore 忽略此方法
+
+####Java虚拟机（JVM）####
+一、JVM生命周期
+启动（以main()主函数）-〉终止（程序所有非守护线程结束，或强制终止）
+二、JVM结构/内存
+类加载器（ClassLoader-〉装载.class文件）
+执行引擎（执行字节码、本地方法）
+运行时数据区（方法区、堆、栈（Java栈、本地方法栈）、PC寄存器）
+
+运行时数据：Java对象实例存放在堆中；常量存放在方法区的常量池；虚拟机加载的类信息、常量、静态变量、
+即时编译器编译后的代码等数据放在方法区；以上区域是所有线程共享的。
+栈是线程私有的，存放该方法的局部变量表(基本类型、对象引用)、操作数栈、动态链接、方法出口等信息。
+一个java程序对应一个JVM，一个方法(线程)对应一个Java栈。
+
+三、Java代码的编译和执行
+Java源代码编译机制：
+Java源代码(.java)-〉Java编译器-〉Java字节码文件(.class,平台无关)-〉Java解释器-〉执行
+
+四、Java类加载
+Bootstrap ClassLoader(C++)
+Extension ClassLoader
+Application ClassLoader
+Custom ClassLoader(自定义)
+
+全盘负责委托机制
+全盘负责-〉该类所依赖及引用的类都由同一个ClassLoader载入
+委托机制-〉先委托父类ClassLoader加载（双亲委派）
+
+线程上下文类加载器
+（非双亲委派模式）
+
+
+五、JVM垃圾回收(GC)
+
+
+六、内存调优
+
+
+
+####JDK/JRE####
+JDK-〉开发工具包（开发库）。
+JRE-〉运行平台（含JVM虚拟机）。
+
+JDK安装/环境变量配置
+JDK卸载-〉控制面板
+
+
+####Java注解####
+注解本质：一种标记，利用反射获取程序中的标记，再根据实际需求进行处理
+注解作用：简化配置，自动化（一些java框架，spring、mybatis、hibernate等都会使用注解来简化配置）
+
+
+####序列化、持久化####
+序列化：将内存中对象转为流，用于主机之间、内外存间、进/线程之间传输；反序列化将流转为内存中对象
+持久化：对象持久状态和瞬时状态之间的转换（数据在硬盘与内存之间存储转换），JDBC、IO
+
+
+
+####泛型####
+泛型类、接口、方法
+目的：代码块的通用性（不用考虑不同的类型），常用于集合；例如：List<String>
+
+class Box<T>{
+	private T theT;
+	
+	public T theB(){
+		return theT;
+	}
+}
+
+public <E,T> T theM(E e,T t){
+	T result = t;
+	...
+	return result; 
+}

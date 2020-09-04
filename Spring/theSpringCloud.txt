@@ -1,0 +1,9 @@
+
+####SpringCloud####
+jar包引用时，springboot和springcloud的版本对应很重要
+
+项目结构（以springboot形式）
+网关、注册中心、服务A、B、C
+
+服务通信（断路保护机制）
+

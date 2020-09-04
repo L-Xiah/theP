@@ -1,0 +1,30 @@
+https://www.bootcss.com/
+
+Bootstrap
+(前端开发框架，来自Twitter)
+
+
+
+####tooltip提示框####
+
+$(node.node).data('snap', node).tooltip({
+    html: true,
+    container: portletBody, // 会影响上下边界
+    placement: 'auto',
+    title: function () {
+        return getNodeTitle(this);
+    },
+    viewport: {            // 左右边界及边距
+        selector: portletBody,
+        padding: 10
+    }
+
+});
+$(node.node).on('show.bs.tooltip', function () {
+    // $(this).data()['bs.tooltip'].options.placement = 'left'; // 代码修改tooltip属性
+});
+$(node.node).on('shown.bs.tooltip', function () {
+});
+$(node.node).on('hidden.bs.tooltip', function () {
+
+});

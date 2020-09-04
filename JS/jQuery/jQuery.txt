@@ -1,0 +1,28 @@
+
+
+jQuery
+(js框架/库，可以更方便的编写js)
+
+
+
+####ajax####
+$.ajax
+        $.ajax({
+            type: "POST",
+            url: ctx + '/BlOverhaulPro/queryTubeOverhaul',
+            async: true,
+            data:{"tubeCode":encodeURIComponent(funTubeCode)},
+            dataType: 'json',
+            error: function (request) {
+            },
+            success: function (data) {
+                console.dir(data);
+            }
+        });
+
+
+####css####
+
+$(rect).css("stroke-width",8);
+
+$(dom).attr("flag","dsd")

@@ -1,0 +1,8 @@
+
+
+
+
+####http-server模块启动####
+安装：>npm install -g http-server
+
+启动：>http-server(需要指定目录)

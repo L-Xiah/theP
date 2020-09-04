@@ -1,0 +1,255 @@
+
+
+
+JavaScript
+https://wangdoc.com/javascript/index.html
+http://es6.ruanyifeng.com/
+(ECMAScript标准-〉由ECMA组织发布-〉最新版本ES6{有浏览器不支持情况})
+ECMAScript标准（JS的语法） + 文档对象模型DOM（网页内容的方法、接口） + 浏览器对象模型BOM（浏览器交换的方法、接口）
+
+
+####input file选择框####
+选择框延迟时间较长（chrome浏览器）
+（http://www.piaoyi.org/computer/Google-Chrome-input-file-delay-3-5.html）
+chrome设置里去掉“保护您和您的设备不受危险网站的侵害”前面的勾即可。
+
+####事件Event####
+$(document).on('theGasPurClosedEvent', theGasPurClosedEventFun);
+$(document).unbind('theGasPurClosedEvent', theGasPurClosedEventFun);
+$(document).trigger("theGasPurClosedEvent");
+
+
+####兼容IE####
+(IE10、IE11)
+1〉IE不支持ES6
+	const、let变量不能使用
+	不支持=>语法
+	
+2〉svg的classList属性不支持
+
+
+####标签id、class####
+不同页面具有相同id的标签；慎用直接调用，需使用限定父标签
+
+
+####属性设置####
+用JS来动态设置CSS样式，常见的有以下几种
+（https://www.cnblogs.com/LiuWeiLong/p/6058059.html）
+1. 直接设置style的属性  某些情况用这个设置 !important值无效
+如果属性有'-'号，就写成驼峰的形式（如textAlign）  如果想保留 - 号，就中括号的形式  element.style['text-align'] = '100px';
+
+element.style.height = '100px';
+2. 直接设置属性（只能用于某些属性，相关样式会自动识别）
+
+element.setAttribute('height', 100);
+element.setAttribute('height', '100px');
+3. 设置style的属性
+
+element.setAttribute('style', 'height: 100px !important');
+4. 使用setProperty  如果要设置!important，推荐用这种方法设置第三个参数
+
+element.style.setProperty('height', '300px', 'important');
+5. 改变class   比如JQ的更改class相关方法
+
+因JS获取不到css的伪元素，所以可以通过改变伪元素父级的class来动态更改伪元素的样式
+
+element.className = 'blue';
+element.className += 'blue fb';
+6. 设置cssText
+
+element.style.cssText = 'height: 100px !important';
+element.style.cssText += 'height: 100px !important';
+
+####分辨率####
+s = " 网页可见区域宽："+ document.body.clientWidth+"<br />";
+s = " 网页可见区域高："+ document.body.clientHeight+"<br />";
+s = " 网页可见区域宽："+ document.body.offsetWidth + " (包括边线和滚动条的宽)"+"<br />";
+s = " 网页可见区域高："+ document.body.offsetHeight + " (包括边线的宽)"+"<br />";
+s = " 网页正文全文宽："+ document.body.scrollWidth+"<br />";
+s = " 网页正文全文高："+ document.body.scrollHeight+"<br />";
+s = " 网页被卷去的高(ff)："+ document.body.scrollTop+"<br />";
+s = " 网页被卷去的高(ie)："+ document.documentElement.scrollTop+"<br />";
+s = " 网页被卷去的左："+ document.body.scrollLeft+"<br />";
+s = " 网页正文部分上："+ window.screenTop+"<br />";
+s = " 网页正文部分左："+ window.screenLeft+"<br />";
+s = " 屏幕分辨率的高："+ window.screen.height+"<br />";
+s = " 屏幕分辨率的宽："+ window.screen.width+"<br />";
+s = " 屏幕可用工作区高度："+ window.screen.availHeight+"<br />";
+s = " 屏幕可用工作区宽度："+ window.screen.availWidth+"<br />";
+s = " 你的屏幕设置是 "+ window.screen.colorDepth +" 位彩色"+"<br />";
+s = " 你的屏幕设置 "+ window.screen.deviceXDPI +" 像素/英寸"+"<br />";
+
+
+####json字符串转换####
+在数据传输过程中，json是以文本，即字符串的形式传递的，而JS操作的是JSON对象，所以，JSON对象和JSON字符串之间的相互转换是关键。例如：
+JSON字符串:
+var str1 = '{ "name": "cxh", "sex": "man" }'; 
+JSON对象:
+var str2 = { "name": "cxh", "sex": "man" };
+一、JSON字符串转换为JSON对象
+//由JSON字符串转换为JSON对象
+var obj = eval('(' + str + ')');
+var obj = str.parseJSON(); //由JSON字符串转换为JSON对象
+var obj = JSON.parse(str); //由JSON字符串转换为JSON对象
+特别注意：如果obj本来就是一个JSON对象，那么使用eval（）函数转换后（哪怕是多次转换）还是JSON对象，但是使用parseJSON（）函数处理后会有问题（抛出语法异常）。
+
+二、可以使用toJSONString()或者全局方法JSON.stringify()将JSON对象转化为JSON字符串。
+例如：
+var last=obj.toJSONString(); //将JSON对象转化为JSON字符
+或者
+var last=JSON.stringify(obj); //将JSON对象转化为JSON字符
+
+注意：
+上 面的几个方法中，除了eval()函数是js自带的之外，其他的几个方法都来自json.js包。新版本的 JSON 修改了 API，将 JSON.stringify() 和 JSON.parse() 两个方法都注入到了 Javascript 的内建对象里面，前者变成了 Object.toJSONString()，而后者变成了 String.parseJSON()。如果提示找不到toJSONString()和parseJSON()方法，则说明您的json包版本太低。
+
+
+####数学运算####
+parseInt()取整
+Math.ceil()向上取整
+Math.floor()向下取整
+Math.round()四舍五入
+% 取余运算符（例6%4->2）
+
+####字符串转换数字####
+js提供了parseInt()和parseFloat()两个转换函数。前者把值转换成整数，后者把值转换成浮点数。
+只有对String类型调用这些方法，这两个函数才能正确运行；对其他类型返回的都是NaN(Not a Number)。
+
+####forEach\every\some####
+
+数组的forEach
+[].forEach(function(value, index, array) {
+  // ...
+});
+对比jQuery中的$.each方法：
+$.each([], function(index, value, array) {
+  // ...
+});
+
+map
+这里的map不是“地图”的意思，而是指“映射”。[].map(); 基本用法跟forEach方法类似：
+[].map(function(value, index, array) {
+  // ...
+});
+$.each(map, function(value, index) {
+  // ...
+});
+
+数组的forEach不能跳出for循环，推荐使用every、some
+Arr.every(function (value) {
+	if(true){
+        	return false;//不能使用break,对于every而言-〉return false 跳出整个遍历循环
+         }
+	return true;//return true 跳出这次遍历循环
+})
+
+
+####字符串####
+1.slice方法
+
+var str="abc12345";
+
+alert(str.slice(3))   //   =>  12345
+
+截取掉前三位字符，保留后几位
+
+alert(str.slice(-3))   //   =>  345
+
+保留后3位
+
+
+2.substring方法
+
+var str="abc12345";
+
+alert(str.substring(3));    //   =>  12345
+
+
+
+/**格式化数字为一个定长的字符串，前面补０
+ *参数:
+ * Source 待格式化的字符串
+ * Length 需要得到的字符串的长度
+ * @return {string}
+ */
+function FormatNum(Source,Length){
+    var strTemp="";
+    for(var i=1;i<=Length-Source.length;i++){
+        strTemp+="0";
+    }
+    return strTemp+Source;
+}
+
+
+####parent/parents####
+关于Jquery的parent和parents
+parent是指取得一个包含着所有匹配元素的唯一父元素的元素集合。
+parents则是取得一个包含着所有匹配元素的祖先元素的元素集合（不包含根元素）。可以通过一个可选的表达式进行筛选。
+可以看出parent取的很明确，就是当前元素的父元素；parents则是当前元素的祖先元素。
+<div id='div1'>
+<div id='div2'><p></p></div>
+<div id='div3' class='a'><p></p></div>
+<div id='div4'><p></p></div>
+</div>
+
+$('p').parent()取到的是div2,div3,div4
+$('p').parent('.a')取到的是div3
+$('p').parent().parent()取到的是div1，这点比较奇特；不过Jquery对象本身的特点决定了这是可行的。
+$('p').parents()取到的是div1,div2,div3,div4
+$('p').parents('.a')取到的是div3
+
+
+####promise####
+//region "promise"
+function test(){
+		thePromise($funSvg,
+					{intI:tempTubeCode,intJ:tempJ+1},
+					theArrColorStateMaterial[theArrTubeMaterial[tempI][tempJ]],theOverhaulClass
+					).then(function onResolved(value) {
+						console.log("-void_setTubeMaterial-success:" + value);
+					})
+					.catch(function onRejected(error) {
+						console.log("-void_setTubeMaterial-error:" + error);
+					});
+}
+
+function thePromise($funSvg,funArrVar,funColor,funClass) {
+	return new Promise(function(resolve, reject) {
+		var tempIsTrue = bool_setSvgLineColor($funSvg,funArrVar,funColor,funClass);
+		if(tempIsTrue){
+			resolve("成功..." + funArrVar.intI + "-" + funArrVar.intJ);
+		}else{
+			reject("错误...");
+		}
+	});
+}
+
+//endregion
+
+
+####获取变量名（挺有意思的）####
+//region unUsed
+    function getParamName() {
+    }
+
+    function fn() {
+        var param1 = 0;
+        var paramThe = 1;
+        console.log(getParamName(param1));
+        console.log(getParamName(paramThe));
+    }
+
+    function callWithVariableName(fn) {
+        eval('(' + fn.toString().replace(/\bgetParamName\s*\(([a-zA-Z_$][\w_$]*)\)/g, function (u, v) {
+            return "'" + v + "'"
+        }) + '())')
+    }
+
+    var unUsedFunc = function (param) {
+        //console.log("--thePk--unUsedFunc------/" + param);
+        if (!param && !!param) {
+            console.log("--unUsedFunc--" + param);
+            callWithVariableName(fn);
+        }
+    };
+
+//endregion
