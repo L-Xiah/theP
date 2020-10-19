@@ -1,5 +1,7 @@
 
-
+####npm####
+npm包管理工具
+npm init 生成package.json
 
 
 ####http-server模块启动####
