@@ -1,0 +1,33 @@
+Vue.js
+前端框架（交互界面、渐进式、数据视图双向绑定）
+
+
+####Vue.js####
+
+1》Vue实例：new Vue({})
+2》数据绑定： v-bind:和{{}} 语法
+3》事件绑定： v-on: 和 @ 语法
+4》反向传递： v-model: 语法
+
+eg：
+<body>
+    <div id="firstVue">
+        <input type="number" v-model.number="my_step" />
+        <button v-on:click="clickButton">Add</button>
+        <p>{{my_total}}</p>
+    </div>
+</body>
+
+var myVue = new Vue({
+	el:'#firstVue',
+	data:{
+		my_step: 1,
+		my_total: 0
+	},
+	methods:{
+		clickButton:function(){
+			this.my_total = this.my_total + this.my_step
+		}
+	}
+})
+
