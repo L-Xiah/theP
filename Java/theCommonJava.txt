@@ -1,0 +1,101 @@
+
+---------------------------------------------------------------------------------------------------------
+字符串--数值类型互相转换
+
+将Double类型的数据保留2位小数： 
+Double a = 2.34566; 
+BigDecimal bd = new BigDecimal(a); 
+Double d = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue(); 
+d输出就是2.35, 注意会四舍五入
+
+
+将String转Double,并保留2位小数： 
+String a = “6.145”; 
+Double d= Double.parseDouble(a); 
+DecimalFormat df = new DecimalFormat(“0.00”); 
+String s = df.format(d); 
+s输出就是6.15,注意会四舍五入
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+保留几位小数
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+public class Test {
+    public static void main(String[] args) {
+
+        // 方法一：输出时对double进行格式化保留两位小数 四舍五入
+        DecimalFormat df = new DecimalFormat("0.00");
+        double d1 = 3.23556;
+        System.out.println(df.format(d1));
+
+        // 方法二：使用BigDecimal 对double进行格式化，并返回一个值 
+        double d2 = 3.23456;
+        BigDecimal b = new BigDecimal(d2);
+        /*setScale 第一个参数为保留位数 第二个参数为舍入机制
+         BigDecimal.ROUND_DOWN 表示不进位 
+         BigDecimal.ROUND_UP表示进位*/
+        d2 = b.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+        System.out.println(d2);
+    }// main
+}
+
+
+---------------------------------------------------------------------------------------------------------
+字符串与JSON对象的相互转换
+
+FastJson对于JSON格式字符串、JSON对象及JavaBean之间的相互转换
+(https://www.cnblogs.com/cdf-opensource-007/p/7106018.html) 
+
+tString = "{***}";
+SendParam param = com.alibaba.fastjson.JSON.parseObject(tString, SendParam.class); // 
+ 
+JSONObject jsonObject = JSON.parseObject(JSON_OBJ_STR);
+//JSONObject jsonObject1 = JSONObject.parseObject(JSON_OBJ_STR); //因为JSONObject继承了JSON，所以这样也是可以的
+
+JSONArray jsonArray = JSON.parseArray(JSON_ARRAY_STR);
+//JSONArray jsonArray1 = JSONArray.parseArray(JSON_ARRAY_STR);//因为JSONArray继承了JSON，所以这样也是可以的
+
+JSONObject jsonObject = JSON.parseObject(COMPLEX_JSON_STR);
+//JSONObject jsonObject1 = JSONObject.parseObject(COMPLEX_JSON_STR);//因为JSONObject继承了JSON，所以这样也是可以的
+    
+String teacherName = jsonObject.getString("teacherName");
+Integer teacherAge = jsonObject.getInteger("teacherAge");
+JSONObject course = jsonObject.getJSONObject("course");
+JSONArray students = jsonObject.getJSONArray("students");
+
+
+
+---------------------------------------------------------------------------------------------------------
+java判断字符串是都为空的方法
+
+方法1
+: 
+if(s == null || s.equals(“”))???????
+最多人使用的一个方法, 直观, 方便, 但效率很低;
+
+方法2
+: if(s == null || s.length() == 0)??
+比较字符串长度, 效率高, 是我知道的最好一个方法
+;
+
+方法3
+: 
+if(s == null || s.isEmpty())??????
+Java SE 6.0 才开始提供的方法, 效率和方法二几乎相等, 但出于兼容性考虑, 推荐使用方法二;
+
+方法4
+: 
+if (s == null || s == “”)
+这是一种比较直观,简便的方法,而且效率也非常的高,与方法二、三的效率差不多;
+
+
+注意：s==null是有必要存在的;如果 String 类型为null, 而去进行 equals(String) 或 length() 等操作会抛出java.lang.NullPointerException;并且s==null 的顺序必须出现在前面，不然同样会抛出java.lang.NullPointerException。
+
+
+
+
+
