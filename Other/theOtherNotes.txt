@@ -1,0 +1,14 @@
+
+
+
+####RSS Feed####
+RSS（Really Simple Syndication:真正简易聚合）
+RSS用于聚合网站的内容，新闻聚合；
+RSS使用xml编写；
+
+
+
+
+####xml和html####
+xml（Extensible Markup Language）：可扩展标记语言
+html（Hyper Text Mackup Language）：超文本标记语言

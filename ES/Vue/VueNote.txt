@@ -1,0 +1,42 @@
+Vue.js
+前端框架（交互界面、渐进式、数据视图双向绑定）
+
+1》前期要求：安装nodeJs、vue-cli/@vue/cli(新版本-推荐)
+2》项目构建：使用 "vue ui" 在web上生成项目；查看目录结构、根据vue语法编写项目；
+3》项目调试：npm install 安装依赖；npm run dev 打包测试；
+4》项目部署：npm run build 打包项目；将打包的dist文件放到服务器（nginx、tomcat、nodejs等）；
+（https://blog.csdn.net/weixin_40302929/article/details/105817369）
+
+####Vue.js####
+
+1》Vue实例：new Vue({})
+2》数据绑定： v-bind:和{{}} 语法
+3》事件绑定： v-on: 和 @ 语法
+4》反向传递： v-model: 语法
+
+eg：
+<body>
+    <div id="firstVue">
+        <input type="number" v-model.number="my_step" />
+        <button v-on:click="clickButton">Add</button>
+        <p>{{my_total}}</p>
+    </div>
+</body>
+
+var myVue = new Vue({
+	el:'#firstVue',
+	data:{
+		my_step: 1,
+		my_total: 0
+	},
+	methods:{
+		clickButton:function(){
+			this.my_total = this.my_total + this.my_step
+		}
+	}
+})
+
+####Vue项目部署####
+首先VUE 是一个javascript的前端框架，注定了它是运行在浏览器里的，对服务器本地没有任何要求，只要一个静态文件服务器能通过http访问到其资源文件就足矣！无论你是用apache ,ngnix 就算你要用node 自己实现一个静态文件服务器，也用不了多少行代码。
+
+npm run dev 是用来在本地开发的时候做调试用的，vue开发的是前端的东西，不是nodejs 服务端程序，按道理讲，生产环境里就不该存在npm，甚至nodejs也不需要（用nodejs来做web静态服务的除外）

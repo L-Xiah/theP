@@ -1,0 +1,11 @@
+
+####SpringBoot项目创建####
+	在线创建（https://start.spring.io/）
+	选好配置
+	生成下载
+	编码
+
+
+####SpringBoot日志####
+Spring Boot 日志配置方法(超详细)
+https://www.cnblogs.com/bigben0123/p/7895696.html

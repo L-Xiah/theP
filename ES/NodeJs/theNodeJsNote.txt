@@ -1,10 +1,32 @@
 
-####npm####
+####npm / cnpm####
 npm包管理工具
 npm init 生成package.json
 
+》》为了提高我们的效率，可以使用淘宝的镜像：http://npm.taobao.org/
+
+　　输入：npm install -g cnpm –registry=https://registry.npm.taobao.org，即可安装npm镜像，以后再用到npm的地方直接用cnpm来代替就好了。
 
 ####http-server模块启动####
 安装：>npm install -g http-server
 
 启动：>http-server(需要指定目录)
+
+
+####npm包版本查看####
+https://www.npmjs.com/
+
+
+####npm网络代理####
+由于公司内网使用代理服务器上网；在使用npm下载时会出现下载不了；
+（https://blog.csdn.net/yanzi1225627/article/details/80247758）
+
+设置代理
+npm config set proxy=http://127.0.0.1:8087
+npm config set registry=http://registry.npmjs.org
+代理用户名和密码
+npm config set proxy http://username:password@server:port
+npm confit set https-proxy http://username:password@server:port
+
+
+
