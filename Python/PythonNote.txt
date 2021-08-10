@@ -1,4 +1,6 @@
 
+
+####安装、包管理####
 一、安装
 （https://blog.csdn.net/c_shell_python/article/details/79647627）
 1〉python解释器（https://www.python.org/）
@@ -15,3 +17,29 @@ Anaconda是一个第三方库，相当与java的jdk
 使用豆瓣代理
 不使用代理：pip install pipenv
 使用代理：pip install --index-url https://pypi.douban.com/simple pipenv
+
+
+
+####import引用####
+
+相对引用：
+from . import base ，当前目录（不用写）
+from .. import base ，上级目录
+from ... import base，上上级目录
+
+
+import os,sys
+# 当前目录
+thePath = os.path.abspath(os.path.dirname(__file__))
+
+# 获取上级目录
+thePath = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+thePath = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# 获取上上级目录
+thePath = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+thePath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+
+# 添加到路径中
+sys.path.append（thePath）
+

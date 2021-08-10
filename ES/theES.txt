@@ -7,6 +7,9 @@ http://es6.ruanyifeng.com/
 JS --> ES + WebAPI
 NodeJS --> ES + NodeAPI
 
+面向对象 --> 基于原型（原型复制）
+
+
 ####兼容IE####
 (IE10、IE11)
 1〉IE不支持ES6

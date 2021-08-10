@@ -17,6 +17,17 @@ npm init 生成package.json
 https://www.npmjs.com/
 
 
+####npm包错误####
+问题：安装了一个插件后运行 npm run serve 就报错；
+
+方案：（删除依赖包--删文件（package-lock.json）--清缓存--重新安装）
+	rm -rf node_modules
+	rm package-lock.json
+	npm cache clear --force
+	npm install
+
+
+
 ####npm网络代理####
 由于公司内网使用代理服务器上网；在使用npm下载时会出现下载不了；
 （https://blog.csdn.net/yanzi1225627/article/details/80247758）

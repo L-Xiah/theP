@@ -10,9 +10,12 @@ Vue.js
 ####Vue.js####
 
 1》Vue实例：new Vue({})
-2》数据绑定： v-bind:和{{}} 语法
-3》事件绑定： v-on: 和 @ 语法
-4》反向传递： v-model: 语法
+2》数据绑定： {{}} 语法
+3》属性绑定： v-bind: 和 : 语法
+4》事件绑定： v-on: 和 @ 语法
+5》反向传递： v-model 语法
+6》v-指令：v-html、v-if、v-show、v-for
+
 
 eg：
 <body>
@@ -36,7 +39,49 @@ var myVue = new Vue({
 	}
 })
 
-####Vue项目部署####
-首先VUE 是一个javascript的前端框架，注定了它是运行在浏览器里的，对服务器本地没有任何要求，只要一个静态文件服务器能通过http访问到其资源文件就足矣！无论你是用apache ,ngnix 就算你要用node 自己实现一个静态文件服务器，也用不了多少行代码。
+created:html加载完成之前，执行。执行顺序：父组件-子组件
 
-npm run dev 是用来在本地开发的时候做调试用的，vue开发的是前端的东西，不是nodejs 服务端程序，按道理讲，生产环境里就不该存在npm，甚至nodejs也不需要（用nodejs来做web静态服务的除外）
+mounted:html加载完成后执行。执行顺序：子组件-父组件
+
+methods：事件方法执行
+
+watch：watch是去监听一个值的变化，然后执行相对应的函数。
+
+computed：computed是计算属性，也就是依赖其它的属性计算所得出最后的值
+
+
+
+####Vue项目调试####
+vue+webpack项目调试方法，vue项目难调试，是因为用了webpack。所有代码揉在了一起；
+webpack配置提供了devtool这个选项，如果设置为 ‘#source-map’，则可以生成.map文件，在chrome浏览器中调试的时候可以显示源代码。
+（https://blog.csdn.net/liyijun4114/article/details/73863228/）
+
+####Vue项目配置####
+根目录下package.json文件配置依赖：
+	"scripts": {
+    "serve": "vue-cli-service serve",
+    "serve_dev": "vue-cli-service serve --mode production", // process.env.NODE_ENV为"production"
+    "build_dev": "vue-cli-service build --mode development", // process.env.NODE_ENV为"development"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+	},
+根目录下vue.config.js文件进行配置：
+	configureWebpack: (config) => {
+        if (process.env.NODE_ENV == 'production') {
+            // 为生产环境
+            config.mode = 'production';
+            config.devtool = 'source-map'; // 显示源码
+        } else {
+            // 为开发环境
+            config.mode = 'development';
+        }
+    }
+
+
+####项目压缩####
+compression-webpack-plugin插件
+服务器需要开启gzip
+
+
+
+
